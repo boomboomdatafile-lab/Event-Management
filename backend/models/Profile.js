@@ -8,7 +8,7 @@ const profileSchema = new mongoose.Schema({
   },
   timezone: {
     type: String,
-    default: 'America/New_York' // Default timezone
+    default: 'America/New_York' 
   },
   createdAt: {
     type: Date,

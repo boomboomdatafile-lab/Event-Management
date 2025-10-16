@@ -8,7 +8,6 @@ const timezone = require('dayjs/plugin/timezone');
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-// Get all events (optionally filtered by profile)
 router.get('/', async (req, res) => {
   try {
     const { profileId } = req.query;
@@ -24,7 +23,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get single event
 router.get('/:id', async (req, res) => {
   try {
     const event = await Event.findById(req.params.id).populate('profiles');
@@ -41,7 +39,6 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   const { profiles, timezone, startDateTime, endDateTime } = req.body;
 
-  // Validate dates
   const start = new Date(startDateTime);
   const end = new Date(endDateTime);
 
@@ -129,7 +126,7 @@ router.patch('/:id', async (req, res) => {
       });
     }
 
-    // Add update log if there were changes
+    // Add update log 
     if (Object.keys(changes).length > 0) {
       event.updateLogs.push({
         updatedAt: new Date(),
